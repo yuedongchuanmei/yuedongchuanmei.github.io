@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的 AI 机器人</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #f5f7ff 0%, #ffffff 100%);
+      color: #222;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #4f46e5;
+    }
+
+    .nav-btn {
+      background: #4f46e5;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 46px;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      color: #111827;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 26px;
+      max-width: 560px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: #4f46e5;
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.22);
+    }
+
+    .btn-secondary {
+      background: #eef2ff;
+      color: #4f46e5;
+    }
+
+    .hero-card {
+      flex: 1;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
+    }
+
+    .hero-card h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .hero-card ul {
+      padding-left: 20px;
+    }
+
+    .hero-card li {
+      margin-bottom: 10px;
+    }
+
+    section {
+      padding: 28px 0 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: #6b7280;
+      max-width: 720px;
+      margin: 0 auto 38px;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      border: 1px solid #f1f1f1;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .card p {
+      color: #6b7280;
+      font-size: 15px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      border: 1px solid #f1f1f1;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: #fff;
+      margin: 0 auto 16px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .faq {
+      display: grid;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f3f4f6;
+    }
+
+    .faq-item h4 {
+      margin-bottom: 8px;
+      color: #111827;
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      color: #6b7280;
+      font-size: 15px;
+    }
+
+    .cta {
+      padding: 10px 0 80px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #fff;
+      border-radius: 24px;
+      padding: 42px 24px;
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      color: #d1d5db;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    footer {
+      padding: 26px 0 40px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    @media (max-width: 992px) {
+      .hero-wrap {
+        flex-direction: column;
+      }
+
+      .hero-text h1 {
+        font-size: 38px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+      }
+
+      .hero {
+        padding: 48px 0 30px;
+      }
+
+      .hero-text h1 {
+        font-size: 30px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .cta-box h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">我的 AI 机器人</div>
+      <a class="nav-btn" href="https://poe.com/invite/98d2ce6b085b43b780c96766bf37a21f" target="_blank">立即体验</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-text">
+          <h1>一个电脑和手机都能使用的 AI 助手</h1>
+          <p>
+            这是一个适合新用户快速上手的机器人展示页。用户无论在电脑还是手机上，
+            都可以点击按钮直接进入 Poe 页面开始使用你的机器人。
+          </p>
+          <div class="hero-buttons">
+            <a class="btn-primary" href="https://poe.com/invite/98d2ce6b085b43b780c96766bf37a21f" target="_blank">立即进入机器人</a>
+            <a class="btn-secondary" href="#features">查看功能</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>它可以帮助用户</h3>
+          <ul>
+            <li>快速提问并得到回答</li>
+            <li>生成文案、标题和内容</li>
+            <li>整理思路和输出方案</li>
+            <li>优化表达和提高效率</li>
+            <li>在不同场景中辅助使用</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">核心功能</h2>
+        <p class="section-desc">
+          你可以把这里改成你的机器人真实用途，例如写作助手、学习助手、运营助手、咨询助手等。
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>智能问答</h3>
+            <p>用户可以围绕某个主题直接发问，快速获得清晰回答。</p>
+          </div>
+          <div class="card">
+            <h3>内容生成</h3>
+            <p>帮助用户生成文章、短文、标题、脚本和不同风格的文案。</p>
+          </div>
+          <div class="card">
+            <h3>表达优化</h3>
+            <p>支持润色句子、优化结构、提升表达清晰度和逻辑性。</p>
+          </div>
+          <div class="card">
+            <h3>创意辅助</h3>
+            <p>为选题、策划、营销想法和内容方向提供灵感支持。</p>
+          </div>
+          <div class="card">
+            <h3>多端使用</h3>
+            <p>电脑、平板、手机都可以访问这个页面并跳转使用机器人。</p>
+          </div>
+          <div class="card">
+            <h3>快速体验</h3>
+            <p>无需复杂操作，点击按钮即可进入你的 Poe 机器人页面。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">如何使用</h2>
+        <p class="section-desc">整个流程非常简单，适合你先快速上线使用。</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>打开网页</h3>
+            <p>用户通过电脑或手机访问你的专属页面。</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>点击立即体验</h3>
+            <p>点击按钮后跳转到 Poe 中的机器人页面。</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>开始对话</h3>
+            <p>进入 Poe 后，用户即可直接和你的机器人交流。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">常见问题</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <h4>这个网页电脑和手机都能打开吗？</h4>
+            <p>可以，这个页面是响应式设计，会自动适配不同设备屏幕。</p>
+          </div>
+          <div class="faq-item">
+            <h4>用户是在这个网页里直接聊天吗？</h4>
+            <p>当前版本不是直接在网页里聊天，而是点击后跳转到 Poe 使用，这对新手最简单稳妥。</p>
+          </div>
+          <div class="faq-item">
+            <h4>后面还能继续升级吗？</h4>
+            <p>可以，后续你可以继续加案例展示、联系表单、用户评价、数据统计等内容。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>立即体验我的 Poe 机器人</h2>
+          <p>点击下面按钮，直接跳转到你的机器人页面。</p>
+          <a class="btn-primary" href="https://poe.com/invite/98d2ce6b085b43b780c96766bf37a21f" target="_blank">马上进入</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 我的 AI 机器人 · All Rights Reserved
+    </div>
+  </footer>
+</body>
+</html>
